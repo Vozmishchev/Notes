@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Note> noteList = new ArrayList<>();
+    List<Note> noteList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerview_notes);
         NoteAdapter adapter = new NoteAdapter(noteList, MainActivity.this);
         recyclerView.setAdapter(adapter);
-
 
     }
 
