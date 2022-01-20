@@ -1,5 +1,6 @@
 package ru.gb.notes;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     private final List<Note> noteList;
     private final Context context;
+    private static final String NEW_NOTE_KEY = "action";
 
     public NoteAdapter(List<Note> noteList, Context context) {
         this.noteList = noteList;
@@ -48,12 +50,24 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         private final TextView titleText;
         private final TextView contentText;
         private final ImageButton deleteButton;
+        private final RecyclerView recyclerviewNotes;
 
         public NoteViewHolder(@NonNull View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.titleText);
             contentText = itemView.findViewById(R.id.contentText);
             deleteButton = itemView.findViewById(R.id.delete_button);
+            recyclerviewNotes = itemView.findViewById(R.id.recyclerview_notes);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, NewNote.class);
+                    intent.putExtra(NEW_NOTE_KEY, "create");
+                    context.startActivity(intent);
+                }
+            });
+
 
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
