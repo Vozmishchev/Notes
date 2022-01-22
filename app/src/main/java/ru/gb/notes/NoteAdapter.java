@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
@@ -20,11 +21,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     private final List<Note> noteList;
     private final Context context;
     private static final String NEW_NOTE_KEY = "action";
+    private final Integer CARD_NUMBER_KEY = 1;
 
     public NoteAdapter(List<Note> noteList, Context context) {
         this.noteList = noteList;
         this.context = context;
+        notifyDataSetChanged();
     }
+
 
     @NonNull
     @Override
@@ -43,7 +47,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     @Override
     public int getItemCount() {
-        return noteList.size();
+        return CARD_NUMBER_KEY;
     }
 
     class NoteViewHolder extends RecyclerView.ViewHolder {
@@ -74,7 +78,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                 public void onClick(View v) {
                     noteList.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
-//                    notifyItemRangeChanged(getAdapterPosition(),noteList.size());
+
                 }
             });
 

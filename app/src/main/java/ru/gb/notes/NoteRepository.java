@@ -9,5 +9,7 @@ public interface NoteRepository {
     void deleteNote(Note note);
 
 
+
+
 }
 

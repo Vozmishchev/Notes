@@ -14,8 +14,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final NoteRepository noteRepository = new SimpleNoteRepository();
-    List<Note> noteList = new ArrayList<>();
+    private NoteRepository noteRepository = new SimpleNoteRepository();
+    private NoteAdapter adapter;
     private ImageButton addNotesButton;
     private static final String NEW_NOTE_KEY = "action";
 
@@ -24,10 +24,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setInitialData();
+
+        noteRepository = App.get(this).getNoteRepository();
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview_notes);
-        NoteAdapter adapter = new NoteAdapter(noteList, MainActivity.this);
+        adapter = new NoteAdapter(noteRepository.getNote(),this);
         recyclerView.setAdapter(adapter);
         addNotesButton = findViewById(R.id.addNotes_Button);
 
@@ -39,16 +40,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-    }
-
-    private void setInitialData() {
-
-        noteList.add(new Note(1, "Название заметки", "Текст заметки"));
-        noteList.add(new Note(2, "Название заметки", "Текст заметки"));
-        noteList.add(new Note(3, "Название заметки", "Текст заметки"));
-        noteList.add(new Note(4, "Название заметки", "Текст заметки"));
 
     }
 }
